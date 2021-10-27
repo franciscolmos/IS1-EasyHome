@@ -1,0 +1,117 @@
+@startuml EasyHome
+
+class Persona {
+    nombre: String
+    apellido: String
+    tipoDNI: String
+    numeroDNI: String
+    fechaNacimiento: Date
+    email: String
+    telefono: String
+    direccion: String
+}
+
+class Inquilino {
+    usuario: String
+    contraseña: String
+    -registrarUsuario(datos)
+    -login()
+    -buscarAlojamiento(filtros)
+    -reservarAlojamiento(Alojamiento, fechaInicio, 
+        fechaFin, cantidadInquilinos, formaDePago)
+    -realizarPago(Reserva, float)
+    -consultarReserva(Reserva)
+    -cancelarReserva(Reserva)
+    -valorarAlojamiento(Alojamiento)
+}
+
+class Propietario {
+    propiedades: List<Alojamiento>
+    -registrarCheckIn(Reserva)
+    -registrarCheckOut(Reserva)
+    -publicarAlojamiento(datos)
+}
+
+class Alojamiento {
+    numeroDormitorios: int
+    numeroBaños: int
+    ocupacionMaxima: int
+    comodidades: List<Comodidad>
+    propietario: Propietario
+    direccion: String
+    zonaTuristica: ZonaTuristica
+    fotos: List<String>
+    estado: Estado
+    precio: float
+    +actualizarEstado(int)
+}
+
+class ZonaTuristica {
+    nombre: String
+    longitud: float
+    latitud: float
+    codigoPostal: String
+}
+
+class Estado {
+    nombreEstado: String
+    codigoEstado: int
+    descripcion: String
+    +getEstado(int)
+}
+
+class Comodidad {
+    nombreComodidad: String
+    codigoComodidad: int
+    descripcion: String
+    +getComodidad(int)
+}
+
+class Reserva {
+    numeroReserva: int
+    fechaInicio: Date
+    fechaFin: Date
+    inquilino: Inquilino
+    alojamiento: Alojamiento
+    cantidadInquilinos: int
+    monto: float
+    estadoDePago: bool
+    estadoReserva: Estado
+}
+
+class Pago {
+    codigoPago: int
+    numeroReserva: int
+    montoPagado: float
+    formaDePago: FormaDePago
+    fechaDePago: Date
+}
+
+class FormaDePago {
+    codigoFormaDePago: int
+    nombreFormaDePago: String
+    descripcion: String
+    +getFormaDePago(int)
+}
+
+Persona <|-- Inquilino
+Inquilino <|-- Propietario
+
+Alojamiento "0-n" <-- "1" Propietario
+Alojamiento "0-n" o-> "0-n" Comodidad
+Alojamiento "0-n" --> "1" ZonaTuristica
+Alojamiento "0-n" --> "1" Estado
+
+Inquilino "1" --> "0-n" Reserva
+Alojamiento "1" -up-> "0-n" Reserva
+
+Pago "0-n" --> "1" FormaDePago
+Reserva "0-1" --> "0-n" Pago
+
+/' DUDAS
+-) ZONA TURISTICA, QUE ATRIBUTOS LE PONEMOS
+-) COMO MANEJAMOS EL TEMA DE FILTROS Y DATOS
+-) ALOJAMIENTO Y COMODIDAD RELACION DE ASOCIACION O AGREGACION
+'/
+
+@enduml

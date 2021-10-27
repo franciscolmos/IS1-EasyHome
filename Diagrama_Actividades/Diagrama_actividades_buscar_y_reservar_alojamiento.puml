@@ -1,0 +1,55 @@
+@startuml Diagrama_actividades_reservar_alojamiento
+
+|#YellowGreen|Inquilino|
+start
+:ingreso de fecha chek-in y check-out;
+:ingreso de cantidad de inquilinos;
+:seleccion de zona turistica;
+:seleccion de otros filtros opcionales;
+
+|#AntiqueWhite|Sistema|
+:mostrar alojamientos disponibles;
+
+|#YellowGreen|Inquilino|
+:consultar alojamiento;
+
+|#AntiqueWhite|Sistema|
+:mostrar informacion de alojamiento;
+
+|#YellowGreen|Inquilino|
+if (reservar) then (yes)
+    |#AntiqueWhite|Sistema|
+    :solicita ingresar forma de pago;
+    |#YellowGreen|Inquilino|
+else(no)
+    stop
+endif
+if (medio electronico) then (yes)
+    |#AntiqueWhite|Sistema|
+    :¿pagar en el momento?;
+else(no)
+    |#AntiqueWhite|Sistema|
+    :registra reserva y pago en efectivo pendiente;
+    stop
+endif
+|#YellowGreen|Inquilino|
+if (pagar) then (yes)
+    |#AntiqueWhite|Sistema|
+    :solicita seleccionar pago total o parcial;
+    |#YellowGreen|Inquilino|
+    :selecciona tipo de pago;
+    |#SpringGreen|Plataforma de Pago|
+    :solicita ingresar datos de medio de pago;
+    |#YellowGreen|Inquilino|
+    :ingresa los datos solicitados;
+    |#SpringGreen|Plataforma de Pago|
+    :efectua el pago;
+    |#YellowGreen|Sistema|
+    :registra reserva y monto pagado;
+else(no)
+    |#AntiqueWhite|Sistema|
+    :registra reserva y pago pendiente;
+    stop
+endif
+stop
+@enduml

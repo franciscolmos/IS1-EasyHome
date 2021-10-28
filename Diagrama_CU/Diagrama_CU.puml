@@ -40,10 +40,7 @@ note bottom of (Valorar alojamiento)
 end note
 
 note right of (Login)
-  * Consultar reserva
-  * Buscar alojamiento
-  * valorar alojamiento
-  Extienden de este CU
+  Cualquier CU extiende de este.
 end note
 
 

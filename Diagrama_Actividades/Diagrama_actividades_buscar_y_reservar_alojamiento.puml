@@ -19,37 +19,26 @@ start
 |#YellowGreen|Inquilino|
 if (reservar) then (yes)
     |#AntiqueWhite|Sistema|
-    :solicita ingresar forma de pago;
+    :registra reserva y la muestra al cliente;
     |#YellowGreen|Inquilino|
 else(no)
     stop
 endif
-if (medio electronico) then (yes)
+if (realizar pago) then (yes)
     |#AntiqueWhite|Sistema|
-    :¿pagar en el momento?;
+    :muestra las formas de pago \n electronicas disponibles;
+    |#YellowGreen|Inquilino|
 else(no)
-    |#AntiqueWhite|Sistema|
-    :registra reserva y pago en efectivo pendiente;
     stop
 endif
-|#YellowGreen|Inquilino|
-if (pagar) then (yes)
-    |#AntiqueWhite|Sistema|
-    :solicita seleccionar pago total o parcial;
-    |#YellowGreen|Inquilino|
-    :selecciona tipo de pago;
+    :selecciona una forma de pago;
     |#SpringGreen|Plataforma de Pago|
     :solicita ingresar datos de medio de pago;
     |#YellowGreen|Inquilino|
     :ingresa los datos solicitados;
     |#SpringGreen|Plataforma de Pago|
-    :efectua el pago;
-    |#YellowGreen|Sistema|
-    :registra reserva y monto pagado;
-else(no)
+    :efectua el pago y genera un comprobante;
     |#AntiqueWhite|Sistema|
-    :registra reserva y pago pendiente;
-    stop
-endif
+    :registra reserva;
 stop
 @enduml

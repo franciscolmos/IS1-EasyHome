@@ -1,0 +1,56 @@
+@startuml Diagrama_secuencia_consultar_Alojamiento_busqueda
+
+/' Flujo Busqueda '/
+actor Inquilino
+boundary PantallaBuscarAlojamientos
+control GestorAlojamientos
+entity Alojamiento
+
+activate Inquilino
+Inquilino -> PantallaBuscarAlojamientos: tomarOpcionBuscarAlojamientos()
+activate PantallaBuscarAlojamientos
+PantallaBuscarAlojamientos -> PantallaBuscarAlojamientos: habilitarPantalla()
+deactivate PantallaBuscarAlojamientos
+
+Inquilino -> PantallaBuscarAlojamientos: buscarAlojamiento(filtros)
+activate PantallaBuscarAlojamientos
+PantallaBuscarAlojamientos -> GestorAlojamientos: buscarAlojamientos(filtros)
+activate GestorAlojamientos
+GestorAlojamientos -> GestorAlojamientos: buscarAlojamientos(filtros)
+loop array_size & false
+    GestorAlojamientos -> Alojamiento: existeAlojamiento()
+    activate Alojamiento
+    Alojamiento -> GestorAlojamientos: false
+    deactivate Alojamiento
+end
+
+GestorAlojamientos -> PantallaBuscarAlojamientos: mostrarAlojamiento(List<Alojamiento>)
+deactivate GestorAlojamientos
+
+Inquilino -> PantallaBuscarAlojamientos : tomarAlojamiento(Alojamiento)
+PantallaBuscarAlojamientos -> PantallaBuscarAlojamientos : mostrarAlojamiento
+deactivate PantallaBuscarAlojamientos
+
+
+/' Flujo Reserva '/
+
+boundary PantallaReservarAlojamiento
+control GestorReservas
+entity NuevaReserva
+
+Inquilino -> PantallaReservarAlojamiento : tomarOpcionReservar()
+activate PantallaReservarAlojamiento
+PantallaReservarAlojamiento -> PantallaReservarAlojamiento: habilitarPantalla()
+Inquilino -> PantallaReservarAlojamiento : confirmarReserva(datos reserva)
+PantallaReservarAlojamiento -> GestorReservas : confirmarReserva(datos reserva)
+activate GestorReservas
+GestorReservas -> NuevaReserva : nuevaReserva(datos reserva)
+activate NuevaReserva
+deactivate NuevaReserva
+GestorReservas --> PantallaReservarAlojamiento : mensajeConfirmacion()
+deactivate GestorReservas
+deactivate PantallaReservarAlojamiento
+deactivate Inquilino
+
+
+@enduml

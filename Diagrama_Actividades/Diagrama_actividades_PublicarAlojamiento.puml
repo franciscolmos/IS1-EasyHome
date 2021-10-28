@@ -1,0 +1,20 @@
+@startuml Diagrama_actividades_reservar_alojamiento
+
+|#YellowGreen|Inquilino|
+    :selecciona la opcion
+    publicar alojamiento;
+
+|#AntiqueWhite|Sistema|
+    :muestra formulario de
+    carga de informacion;
+
+|#YellowGreen|Inquilino|
+    :completa formulario
+    de carga de informacion;
+    :selecciona publicar;
+
+|#AntiqueWhite|Sistema|
+    :genera y muestra la
+    publicacion;
+    stop
+@enduml

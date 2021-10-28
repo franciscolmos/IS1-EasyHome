@@ -1,0 +1,14 @@
+@startuml Diagrama_Estado_Alohamiento_EasyHome
+
+[*] -> Libre
+Libre -> Reservado : [Reserva confirmada] / reservarAlojamiento()
+Libre -> Alquilado : [Check-in] / registrarCheckIn()
+Reservado -> Alquilado : [Check-in] / registrarCheckIn()
+Reservado -> Libre : [Reserva canelada] / cancelarReserva()
+Alquilado --> Libre : [Check-out] / registrarCheckOut()
+
+/'
+    * Es necesario que tenga fin ?
+    * Deberiamos incluir el pago como un estado ?
+'/
+@enduml 

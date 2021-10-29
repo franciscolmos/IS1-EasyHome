@@ -15,21 +15,12 @@ class Inquilino {
     usuario: String
     contraseña: String
     -registrarUsuario(datos)
+    -editarUsuario(datos)
     -login()
-    -buscarAlojamiento(filtros)
-    -reservarAlojamiento(Alojamiento, fechaInicio, 
-        fechaFin, cantidadInquilinos, formaDePago)
-    -realizarPago(Reserva, float)
-    -consultarReserva(Reserva)
-    -cancelarReserva(Reserva)
-    -valorarAlojamiento(Alojamiento)
 }
 
 class Propietario {
     propiedades: List<Alojamiento>
-    -registrarCheckIn(Reserva)
-    -registrarCheckOut(Reserva)
-    -publicarAlojamiento(datos)
 }
 
 class Alojamiento {
@@ -44,7 +35,15 @@ class Alojamiento {
     estado: Estado
     precio: float
     formasDePagoHabilitadas: FormaDePago
-    +actualizarEstado(int)
+    publicado: Boolean
+    valoracion: Float
+    +reservarAlojamiento()
+    +registrarCheckIn()
+    +registrarCheckOut()
+    +publicarAlojamiento()
+    +buscarAlojamiento(filtros)
+    +valorarAlojamiento(Float)
+    +editarAlojamiento(datos)
 }
 
 class ZonaTuristica {
@@ -78,14 +77,18 @@ class Reserva {
     monto: float
     estadoDePago: bool
     estadoReserva: Estado
+    +consultarReserva(Reserva)
+    +cancelarReserva(Reserva)
+    +editarReserva(Reserva)
 }
 
 class Pago {
-    codigoPago: int
-    numeroReserva: int
+    codigo: int
+    tipo: string
     montoPagado: float
     formaDePago: FormaDePago
     fechaDePago: Date
+    +registrarPago()
 }
 
 class FormaDePago {
@@ -103,12 +106,13 @@ class Alquiler {
     alojamiento: Alojamiento
     cantidadInquilinos: int
     monto: float
+    +consultarAlquiler()
 }
 
-Persona <|-- Inquilino
-Inquilino <|-- Propietario
+Persona <|-left- Inquilino
+Inquilino <|-right- Propietario
 
-Alojamiento "0-n" <-- "1" Propietario
+Alojamiento "0-n" <-left- "1" Propietario
 Alojamiento "0-n" o-> "0-n" Comodidad
 Alojamiento "0-n" --> "1" ZonaTuristica
 Alojamiento "0-n" --> "1" Estado
@@ -118,18 +122,10 @@ Inquilino "1" --> "0-n" Reserva
 Inquilino "1" --> "0-n" Alquiler
 Alojamiento "1" <-up- "0-n" Reserva
 Alojamiento "1" <-up- "0-n" Alquiler
+Reserva "0-1" -left-> "0-1" Alquiler
 
 Pago "0-n" --> "1-n" FormaDePago
 Reserva "0-1" --> "0-n" Pago
 Alquiler "0-1" --> "0-n" Pago
-
-/' DUDAS
--) ZONA TURISTICA, QUE ATRIBUTOS LE PONEMOS
--) COMO MANEJAMOS EL TEMA DE FILTROS Y DATOS
--) ALOJAMIENTO Y COMODIDAD RELACION DE ASOCIACION O AGREGACION
--) NO PODEMOS REPRESENTAR UN ALQUILER COMO UNA RESERVA CON ESTADO ALQUILADO?
--) CLASE GENERICA DE RESERVA Y ALQUILER???
--) EXISTE CLASE BUSCADOR DE ALOJAMIENTOS? COMO BUSCA UN ALOJAMIENTO UN USUARIO?
-'/
 
 @enduml

@@ -1,6 +1,8 @@
 @startuml Diagrama_CU
 actor Inquilino
 Inquilino -right-> (Crear usuario)
+Inquilino -right-> (Modificar usuario)
+Inquilino -right-> (Borrar usuario)
 Inquilino -left-> (Consultar reserva)
 Inquilino --> (Valorar alojamiento)
 Inquilino -up-> (Buscar alojamiento)
@@ -8,11 +10,8 @@ Inquilino --> (Alquilar alojamiento)
 Inquilino -up-> (Login)
 
 (Consultar reserva) <.down. (Cancelar reserva) : <<extends>>
-(Cancelar reserva) <.down. (Devolucion dinero) : <<extends>>
 (Reservar alojamiento) .right.> (Buscar alojamiento) : <<extends>>
-(Realizar pago) .up.> (Alquilar alojamiento) : <<extends>>
 (Alquilar alojamiento) ..> (Registrar check-in) : <<includes>>
-(Alquilar alojamiento) <.up. (Crear usuario) : <<extends>>
 (Consultar reserva) <.. (Realizar pago) : <<extends>>
 (Reservar alojamiento) ..>  (Consultar reserva) : <<includes>>
 (Consultar reserva) <.. (Editar reserva) : <<extends>>
@@ -22,11 +21,13 @@ actor Propietario
 Propietario --> (Registrar check-in)
 Propietario --> (Publicar alojamiento)
 Propietario --> (Registrar check-out)
-
+Propietario --> (Cobrar)
+Propietario --> (Registrar usuario)
 
 actor Plataforma_de_Pago
 Plataforma_de_Pago -up-> (Realizar pago)
 Plataforma_de_Pago -right-> (Devolucion dinero)
+Plataforma_de_Pago --> (Cobrar)
 
 note right of (Propietario)
   Los casos de uso del

@@ -34,13 +34,15 @@ class Alojamiento {
     fotos: List<String>
     estado: Estado
     precio: float
-    formasDePagoHabilitadas: FormaDePago
+    formasDePagoHabilitadas: List<FormaDePago>
     publicado: Boolean
     valoracion: Float
     +reservarAlojamiento()
     +registrarCheckIn()
     +registrarCheckOut()
     +publicarAlojamiento()
+    +eliminarAlojamiento()
+    +getAlojamientoById(idPropietario)
     +buscarAlojamiento(filtros)
     +valorarAlojamiento(Float)
     +editarAlojamiento(datos)
@@ -116,7 +118,7 @@ Alojamiento "0-n" <-left- "1" Propietario
 Alojamiento "0-n" o-> "0-n" Comodidad
 Alojamiento "0-n" --> "1" ZonaTuristica
 Alojamiento "0-n" --> "1" Estado
-Alojamiento "0-n" -->  "1" FormaDePago
+Alojamiento "0-n" -->  "1-n" FormaDePago
 
 Inquilino "1" --> "0-n" Reserva
 Inquilino "1" --> "0-n" Alquiler
@@ -125,7 +127,7 @@ Alojamiento "1" <-up- "0-n" Alquiler
 Reserva "0-1" -left-> "0-1" Alquiler
 
 Pago "0-n" --> "1-n" FormaDePago
-Reserva "0-1" --> "0-n" Pago
+Reserva "0-1" --> "1-n" Pago
 Alquiler "0-1" --> "0-n" Pago
 
 @enduml

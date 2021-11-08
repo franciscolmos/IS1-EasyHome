@@ -34,22 +34,25 @@ deactivate PantallaBuscarAlojamientos
 
 /' Flujo Reserva '/
 
-boundary PantallaReservarAlojamiento
 control GestorReservas
+entity Reserva
 entity NuevaReserva
 
-Inquilino -> PantallaReservarAlojamiento : tomarOpcionReservar()
-activate PantallaReservarAlojamiento
-PantallaReservarAlojamiento -> PantallaReservarAlojamiento: habilitarPantalla()
-Inquilino -> PantallaReservarAlojamiento : confirmarReserva(datos reserva)
-PantallaReservarAlojamiento -> GestorReservas : confirmarReserva(datos reserva)
+Inquilino -> GestorReservas : tomarOpcionReservar()
 activate GestorReservas
+loop array_size & false
+    GestorReservas -> Reserva: disponibilidadAlojamiento()
+    activate Reserva
+    Reserva -> GestorReservas: true
+    deactivate Reserva
+end
 GestorReservas -> NuevaReserva : nuevaReserva(datos reserva)
 activate NuevaReserva
 deactivate NuevaReserva
-GestorReservas --> PantallaReservarAlojamiento : mensajeConfirmacion()
+GestorReservas --> PantallaBuscarAlojamientos : mensajeConfirmacion()
+activate PantallaBuscarAlojamientos
+deactivate PantallaBuscarAlojamientos
 deactivate GestorReservas
-deactivate PantallaReservarAlojamiento
 deactivate Inquilino
 
 

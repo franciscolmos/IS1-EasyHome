@@ -1,28 +1,30 @@
 @startuml Diagrama_CU
 actor Inquilino
-Inquilino -right-> (Crear usuario)
-Inquilino -right-> (Modificar usuario)
-Inquilino -right-> (Borrar usuario)
-Inquilino -left-> (Consultar reserva)
-Inquilino --> (Valorar alojamiento)
-Inquilino -up-> (Buscar alojamiento)
-Inquilino --> (Alquilar alojamiento)
+Inquilino -up-> (Crear usuario)
+Inquilino -up-> (Editar usuario)
+Inquilino -up-> (Borrar usuario)
 Inquilino -up-> (Login)
+Inquilino -left-> (Consultar reserva)
+Inquilino -left-> (Editar reserva)
+Inquilino -down-> (Valorar alojamiento)
+Inquilino -down-> (Buscar alojamiento)
+Inquilino -down-> (Alquilar alojamiento)
+Inquilino -down-> (Reservar alojamiento)
+Inquilino -right-> (Realizar pago)
 
-(Consultar reserva) <.down. (Cancelar reserva) : <<extends>>
-(Reservar alojamiento) .right.> (Buscar alojamiento) : <<extends>>
 (Alquilar alojamiento) ..> (Registrar check-in) : <<includes>>
-(Consultar reserva) <.. (Realizar pago) : <<extends>>
-(Reservar alojamiento) ..>  (Consultar reserva) : <<includes>>
-(Consultar reserva) <.. (Editar reserva) : <<extends>>
- 
 
 actor Propietario
-Propietario --> (Registrar check-in)
 Propietario --> (Publicar alojamiento)
-Propietario --> (Registrar check-out)
-Propietario --> (Cobrar)
-Propietario --> (Registrar usuario)
+Propietario --> (Despublicar alojamiento)
+Propietario --> (Consultar alojamientos)
+Propietario --> (Editar alojamiento)
+
+actor Administrador
+Administrador --> (Registrar check-in)
+Administrador --> (Registrar check-out)
+Administrador --> (Registrar inquilino)
+Administrador --> (Cobrar)
 
 actor Plataforma_de_Pago
 Plataforma_de_Pago -up-> (Realizar pago)
@@ -40,21 +42,8 @@ note bottom of (Valorar alojamiento)
   luego del check-out.
 end note
 
-note right of (Login)
-  Cualquier CU extiende de este.
+note left of (Login)
+  Cualquier CU incluye al login.
 end note
 
-
-
-/'
-    CONSULTAS:
-    * ¿Como diagramamos los pagos parciales?
-    * Propietario --> (Pago efectivo)
-    * No se deberia poder realizar un pago
-      sin antes alquilar un alojamiento
-      (¿esto es a nivel D_CU o DC ?)
-    * ¿ Devolucion dinero es CU ?
-    * Devolucion dinero es CU como se relaciona
-      con la Plataforma_de_Pago
-'/
 @enduml

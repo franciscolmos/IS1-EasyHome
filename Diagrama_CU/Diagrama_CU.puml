@@ -13,6 +13,7 @@ Inquilino -down-> (Reservar alojamiento)
 Inquilino -right-> (Realizar pago)
 
 (Alquilar alojamiento) ..> (Registrar check-in) : <<includes>>
+(Reservar alojamiento) ..> (Realizar pago): <<includes>>
 
 actor Propietario
 Propietario --> (Publicar alojamiento)
@@ -43,7 +44,10 @@ note bottom of (Valorar alojamiento)
 end note
 
 note left of (Login)
-  Cualquier CU incluye al login.
+  Cualquier CU incluye a login
+  excepto Buscar alojamiento,
+  alquilar alojamiento y crear
+  usuario
 end note
 
 @enduml

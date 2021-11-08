@@ -18,6 +18,7 @@ abstract Persona {
 class Usuario {
     usuario: String
     contraseña: String
+    validado: bool
     +validarUsuario()
     -editarUsuario(usuario, contraseña)
     -borrarUsuario()

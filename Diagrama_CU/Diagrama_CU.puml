@@ -11,13 +11,14 @@ Inquilino -down-> (Buscar alojamiento)
 Inquilino -down-> (Alquilar alojamiento)
 Inquilino -down-> (Reservar alojamiento)
 Inquilino -right-> (Realizar pago)
+Inquilino --> (Cancelar reserva)
 
 (Alquilar alojamiento) ..> (Registrar check-in) : <<includes>>
 (Reservar alojamiento) ..> (Realizar pago): <<includes>>
 
 actor Propietario
-Propietario --> (Publicar alojamiento)
-Propietario --> (Despublicar alojamiento)
+Propietario --> (Registrar alojamiento)
+Propietario --> (Eliminar alojamiento)
 Propietario --> (Consultar alojamientos)
 Propietario --> (Editar alojamiento)
 
@@ -26,6 +27,7 @@ Administrador --> (Registrar check-in)
 Administrador --> (Registrar check-out)
 Administrador --> (Registrar inquilino)
 Administrador --> (Cobrar)
+Administrador -up-> (Login)
 
 actor Plataforma_de_Pago
 Plataforma_de_Pago -up-> (Realizar pago)

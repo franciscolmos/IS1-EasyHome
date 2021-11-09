@@ -6,7 +6,6 @@ abstract Persona {
     tipoDNI: String
     numeroDNI: String
     fechaNacimiento: Date
-    email: String
     telefono: String
     direccion: String
     usuario: Usuario
@@ -16,7 +15,7 @@ abstract Persona {
 }
 
 class Usuario {
-    usuario: String
+    email: String
     contraseña: String
     validado: bool
     +validarUsuario()
@@ -52,15 +51,11 @@ class Alojamiento {
     formasDePago: List<FormaDePago>
     publicado: Boolean
     valoracion: List<Valoracion>
-    +buscarAlojamiento(numeroDormitorios, numeroBaños, 
-    ocupacionMaxima, comodidades, zonaTuristica, 
-    precioMinimo, precioMaximo, valoracionMinima, 
-    valoracionMaxima, fechaCheckIn, fechaCheckOut)
-    +editarAlojamiento(numeroDormitorios, numeroBaños, 
-    ocupacionMaxima, comodidades, zonaTuristica, 
-    direccion, fotos, precio)
+    +buscarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n precioMinimo, precioMaximo, valoracionMinima,\n valoracionMaxima, fechaCheckIn, fechaCheckOut)
+    +editarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n direccion, fotos, precio)
     +getAlojamientoById(idPropietario)
-    +eliminarAlojamiento()
+    +ordenarAlojamientos(int)
+    +eliminarAlojamiento(int)
     +publicarAlojamiento()
     +suspenderAlojamiento()
     +actualizarEstado(int)

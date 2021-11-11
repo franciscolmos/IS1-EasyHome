@@ -54,6 +54,7 @@ class Alojamiento {
     +buscarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n precioMinimo, precioMaximo, valoracionMinima,\n valoracionMaxima, fechaCheckIn, fechaCheckOut)
     +editarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n direccion, fotos, precio)
     +getAlojamientoById(idPropietario)
+    +getAlojamiento()
     +ordenarAlojamientos(int)
     +eliminarAlojamiento(int)
     +publicarAlojamiento()

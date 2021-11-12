@@ -18,23 +18,25 @@ class Usuario {
     email: String
     contraseña: String
     validado: bool
+    rol: Rol 
     +validarUsuario()
     -editarUsuario(usuario, contraseña)
     -borrarUsuario()
     -login()
 }
 
+class Rol {
+    codigoRol: Int
+    nombreRol: String
+}
+
 class Inquilino {
-    -editarPersona(nombre, apellido, 
-    tipoDNI, numeroDNI, fechaNacimiento, 
-    email, telefono, direccion)
+    -editarPersona(nombre, apellido,\ntipoDNI, numeroDNI,fechaNacimiento,\nemail, telefono, direccion)
 }
 
 class Propietario {
     propiedades: List<Alojamiento>
-    -editarPersona(nombre, apellido, 
-    tipoDNI, numeroDNI, fechaNacimiento, 
-    email, telefono, direccion)
+    -editarPersona(nombre, apellido,\ntipoDNI, numeroDNI,fechaNacimiento,\nemail, telefono, direccion)
 }
 
 class Alojamiento {
@@ -43,7 +45,7 @@ class Alojamiento {
     ocupacionMaxima: int
     comodidades: List<Comodidad>
     propietario: Propietario
-    direccion: String
+    direccion: Direccion
     zonaTuristica: ZonaTuristica
     fotos: List<String>
     estado: Estado
@@ -64,6 +66,16 @@ class Alojamiento {
     +registrarCheckOut()
     +valorarAlojamiento(Valoracion)
     -actualizarValoracion()
+}
+
+class Direccion {
+    calle: String
+    numeroCalle: Int
+    piso: Int
+    numeroDepto: String
+    localidad: String
+    provincia: String
+    pais: String
 }
 
 class ZonaTuristica {
@@ -158,10 +170,12 @@ Alojamiento "n" -->  "n" FormaDePago
 Alojamiento "1" -left->  "0-n" Valoracion
 Alojamiento "1" <-up- "0-n" Reserva
 Alojamiento "1" <-up- "0-n" Alquiler
+Alojamiento "1" -right-> "1" Direccion 
 
 Usuario "1" --> "0-n" Reserva
 Usuario "1" --> "0-n" Alquiler
 Usuario "1" --> "0-n" Valoracion
+Usuario "0-n" --> "1" Rol
 
 Reserva "0-1" -left-> "0-1" Alquiler
 Reserva "0-1" --> "1-n" Pago

@@ -1,20 +1,25 @@
 @startuml Diagrama_actividades_reservar_alojamiento
 
-|#YellowGreen|Inquilino|
+|#YellowGreen|Propietario|
     :selecciona la opcion
-    publicar alojamiento;
+    "Publicar Alojamiento";
 
 |#AntiqueWhite|Sistema|
     :muestra formulario de
     carga de informacion;
 
-|#YellowGreen|Inquilino|
-    :completa formulario
-    de carga de informacion;
-    :selecciona publicar;
+|#YellowGreen|Propietario|
+    :completa formulario y acepta
+    terminos y condiciones de uso;
+    :selecciona la opcion "Registrar";
 
 |#AntiqueWhite|Sistema|
-    :genera y muestra la
-    publicacion;
-    stop
+    if(publicacion) then (yes)
+    :registra alojamiento 
+    y lo publica;
+    else(no)
+    :registra alojamiento
+     y no lo publica;
+    endif
+stop
 @enduml

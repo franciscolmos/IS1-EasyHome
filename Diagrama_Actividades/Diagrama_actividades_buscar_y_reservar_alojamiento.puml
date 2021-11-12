@@ -11,27 +11,27 @@ start
 :mostrar alojamientos disponibles;
 
 |#YellowGreen|Inquilino|
-:consultar alojamiento;
+:seleccion alojamiento;
 
 |#AntiqueWhite|Sistema|
 :mostrar informacion de alojamiento;
 
 |#YellowGreen|Inquilino|
-if (reservar) then (yes)
+if (seleccion opcion "Reservar") then (yes)
     |#AntiqueWhite|Sistema|
-    :registra reserva y la muestra al cliente;
+    :muestra resumen de reserva\nal usuario;
     |#YellowGreen|Inquilino|
 else(no)
     stop
 endif
-if (realizar pago) then (yes)
+if (seleccion opcion "Pagar") then (yes)
     |#AntiqueWhite|Sistema|
     :muestra las formas de pago \n electronicas disponibles;
     |#YellowGreen|Inquilino|
 else(no)
     stop
 endif
-    :selecciona una forma de pago;
+    :selecciona una forma de pago y confirma;
     |#SpringGreen|Plataforma de Pago|
     :solicita ingresar datos de medio de pago;
     |#YellowGreen|Inquilino|
@@ -39,6 +39,6 @@ endif
     |#SpringGreen|Plataforma de Pago|
     :efectua el pago y genera un comprobante;
     |#AntiqueWhite|Sistema|
-    :registra reserva;
+    :muestra comprobante\ny registra reserva;
 stop
 @enduml

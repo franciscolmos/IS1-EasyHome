@@ -17,8 +17,8 @@ Inquilino --> (Cancelar reserva)
 (Reservar alojamiento) ..> (Realizar pago): <<includes>>
 
 actor Propietario
-Propietario --> (Registrar alojamiento)
-Propietario --> (Eliminar alojamiento)
+Propietario --> (Publicar alojamiento)
+Propietario --> (Despublicar alojamiento)
 Propietario --> (Consultar alojamientos)
 Propietario --> (Editar alojamiento)
 
@@ -47,9 +47,8 @@ end note
 
 note left of (Login)
   Cualquier CU incluye a login
-  excepto Buscar alojamiento,
-  alquilar alojamiento y crear
-  usuario
+  excepto Buscar alojamiento, crear
+  usuario y devolucion de dinero.
 end note
 
 @enduml

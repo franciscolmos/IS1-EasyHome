@@ -53,7 +53,7 @@ class Alojamiento {
     formasDePago: List<FormaDePago>
     publicado: Boolean
     valoracion: List<Valoracion>
-    +buscarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n precioMinimo, precioMaximo, valoracionMinima,\n valoracionMaxima, fechaCheckIn, fechaCheckOut)
+    +buscarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n precioMinimo, precioMaximo, valoracionMinima,\n valoracionMaxima, fechaCheckIn, fechaCheckOut, ordenamiento)
     +editarAlojamiento(numeroDormitorios, numeroBaños,\n ocupacionMaxima, comodidades, zonaTuristica,\n direccion, fotos, precio)
     +getAlojamientoById(idPropietario)
     +getAlojamiento()
